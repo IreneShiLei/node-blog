@@ -1,0 +1,24 @@
+ <% include layout.ejs %>
+
+ <form method="post" action="/u_post" class="well form-inline center" style="text-align:center;">  
+ <input type="text" class="span8" name="post">  <button type="submit" class="btn btn-success" onclick='sendMsg();'>
+ <i class="icon-comment icon-white"></i>发言</button></form> 
+
+
+
+<div class="row" >
+<% 
+   posts.forEach(function(post, index) {
+%>
+	<div class="span6 " style="float:left;">
+		<h2>
+		<a href="/u_lists/<%= post.bid %>"><%= post.name %></a> 
+		</h2><span>发表与<%= post.datetime %></span>
+		<p><%= post.content %></p>
+	</div>
+	<!-- end row -->
+<%}); %>
+</div>
+
+
+<% include footer.html %>

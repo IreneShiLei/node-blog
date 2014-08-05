@@ -1,0 +1,63 @@
+<% include layout.ejs %>
+  
+
+<div class="row"> 
+<% 
+   rows.forEach(function(post, index) {
+%>
+  <div class="span4"> 
+  <input type="hidden" id="id" value="<%= post.id %> ">
+    <h2><%= post.name %></h2> 
+     <p> <%= post.content %></p> 
+  </div> 
+ <%}); %>
+  
+
+</div> 
+  <% if (!u) { %>	
+    <a class="btn btn-primary btn-large" href="/login" > 登录</a> 
+    <a class="btn btn-large" href="/reg"> 立即注册</a> 
+  <% } %>
+   <% if (u) { %>	
+     <a href="/u_list/"> <input type="text" class="span8" name="post">  <button type="submit" class="btn btn-success">
+  <i class="icon-comment icon-white"></i>发言</button></a>
+  <% } %>
+
+<h3><a href="###" onclick="shows()" id="z">展开全部</a></h3>
+<span id="du"><img src="/images/loading2.gif"></span>
+<script>
+	$("#du").hide();
+	function shows(){
+		$("#du").show();
+		 setTimeout("show()",500);
+	}
+
+	function show(){
+		var id = $("#id").val();
+		$.post("/u_aa",{id:id},function(data){
+			var html = "";
+			 $.each(data,function(index,row){
+				 html += "<div class='span20'>";
+				 html += "<h2>"+ row.datetime +"</h2> ";
+				 html += "<p>"+ row.content +"</p>"; 
+				 html += " </div> ";
+ 
+			 });
+			$("#r").html(html);	
+			$("#du").hide();
+
+		 },"json");
+
+	}
+
+
+</script>
+
+
+
+
+ <div class="row" id="r"> 
+
+ 
+</div> 
+<% include footer.html %>

@@ -1,0 +1,114 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html> 
+  <head> 
+    <title><%= title %> - Microblog</title> 
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' /> 
+    <style type="text/css"> 
+      body { 
+        padding-top: 60px; 
+        padding-bottom: 40px; 
+      } 
+    </style> 
+    <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+     <script src="/javascripts/jquery.js"></script> 
+  </head> 
+
+  <body> 
+   
+    <div class="navbar navbar-fixed-top"> 
+      <div class="navbar-inner"> 
+
+        <div class="container"> 
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-co
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+          </a> 
+          <a class="brand" href="/">Microblog</a> 
+
+	
+          <div class="nav-collapse"> 
+            <ul class="nav"> 
+	 <script src="/javascripts/socket.js"></script>
+	
+              <li class="active"><a href="/">首页</a></li> 
+	      <% if (!u) { %>
+		<li><a href="/login">登入</a></li>
+		<li><a href="/reg">注册</a></li>
+		<% } else { %>
+
+		 <script type="text/javascript" src="/javascripts/yanue.pop.js"></script>
+    		<script>
+
+		  var socket = io.connect('http://127.0.0.1:300');
+		  socket.on('news', function (data) {
+		  if(data){
+			 $.each(data,function(i,k){
+			$("#xx").text(k);  
+			var pop=new Pop(k,
+			"http://www.yanue.info/js/pop/pop.html",
+			"请输入你的内容简介，这里是内容简介.请输入你的内容简介，这里是内容简介.请输入你的内容简介，这里是内容简介");
+		
+		  });
+		  }
+		 
+		 });	
+	
+	</script>
+		<li><a href="/logout">登出</a></li>
+		<li><a href="###">欢迎你：<b><%= u %></b></a></li>
+		  
+		<li><a href="###">消息：<b id="xx" style="color:#F00">()</b></a></li>
+		<% } %>
+            </ul> 
+          </div> 
+        </div> 
+      </div> 
+    </div> 
+   
+ <% if (success && success.length ) { %>
+    <div class="alert alert-success">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        <strong><%= success %></strong>
+    </div>
+<% } %>
+ <% if (error && error.length ) { %>
+    <div class="alert alert-error">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        <strong><%= error %></strong>
+    </div>
+<% } %>
+
+
+  <div id="container" class="container"> 
+
+<div id="pop" style="display:none;">
+	<style type="text/css">
+	*{margin:0;padding:0;}
+	#pop{background:#fff;width:260px;border:1px solid #e0e0e0;font-size:12px;position: fixed;right:10px;bottom:10px;}
+	#popHead{line-height:32px;background:#f6f0f3;border-bottom:1px solid #e0e0e0;position:relative;font-size:12px;padding:0 0 0 10px;}
+	#popHead h2{font-size:14px;color:#666;line-height:32px;height:32px;}
+	#popHead #popClose{position:absolute;right:10px;top:1px;}
+	#popHead a#popClose:hover{color:#f00;cursor:pointer;}
+	#popContent{padding:5px 10px;}
+	#popTitle a{line-height:24px;font-size:14px;font-family:'微软雅黑';color:#333;font-weight:bold;text-decoration:none;}
+	#popTitle a:hover{color:#f60;}
+	#popIntro{text-indent:24px;line-height:160%;margin:5px 0;color:#666;}
+	#popMore{text-align:right;border-top:1px dotted #ccc;line-height:24px;margin:8px 0 0 0;}
+	#popMore a{color:#f60;}
+	#popMore a:hover{color:#f00;}
+	</style>
+	<div id="popHead">
+	<a id="popClose" title="关闭">关闭</a>
+	<h2>温馨提示</h2>
+	</div>
+	<div id="popContent">
+	<dl>
+		<dt id="popTitle"><a href="http://yanue.info/" target="_blank">这里是参数</a></dt>
+		<dd id="popIntro">这里是内容简介</dd>
+	</dl>
+	<p id="popMore"><a href="http://yanue.info/" target="_blank">查看 »</a></p>
+	</div>
+</div>

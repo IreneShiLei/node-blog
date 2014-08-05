@@ -1,0 +1,34 @@
+<% include layout.ejs %>
+<div class="hero-unit" >  
+  <h1>欢迎来到 Microblog</h1> 
+  <p> Microblog 是一个基于 Node.js 的微博系统。</p> 
+  <p> 
+  <% if (!u) { %>	
+    <a class="btn btn-primary btn-large" href="/login" > 登录</a> 
+    <a class="btn btn-large" href="/reg"> 立即注册</a> 
+  <% } %>
+   <% if (u) { %>	
+    
+  <a href="/u_list/"> <input type="text" class="span8" name="post">  <button type="submit" class="btn btn-success">
+  <i class="icon-comment icon-white"></i>我也要发言</button></a>
+  <% } %>
+
+  </p> 
+</div>  
+
+
+<div class="row">  
+<% 
+   all.forEach(function(post, index) {
+%>
+  <div class="span4">  
+    <h2><a href="/u_lists/<%= post.bid %>"><%= post.name %></a> 说</h2> 
+     <p> <%= post.content %></p> 
+  </div> 
+ 
+  <%}); %>
+
+</div> 
+
+ <i class="icon-comment icon-white"></i>发言</button>
+<% include footer.html %>
